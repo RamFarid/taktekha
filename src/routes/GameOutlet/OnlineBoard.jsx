@@ -28,6 +28,7 @@ import { BsFlag } from 'react-icons/bs'
 import { GiOverkill } from 'react-icons/gi'
 import { uid } from 'uid/secure'
 import { ONLINE_INITIAL_STATE } from '../../GameProvider'
+import Loader from '../../components/reusable/Loader'
 
 // const notification = new Audio(msgNotification)
 
@@ -100,12 +101,14 @@ function OnlineBoard() {
       if (
         onlineGame?.reqsAgain[0].length !== 0 &&
         onlineGame?.reqsAgain[1].length !== 0 &&
-        onlineGame?.reqsAgain[2].length !== 0
+        onlineGame?.reqsAgain[2].length !== 0 &&
+        isLivePlay
       ) {
         navigateTo(`/board/${onlineGame.reqsAgain[2]}`)
       }
     }
     oneMoreAction()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigateTo, onlineGame.reqsAgain])
 
   const refuseReqAagin = () => {
@@ -138,6 +141,7 @@ function OnlineBoard() {
 
   return (
     <section className='game-board'>
+      {isLivePlay && onlineGame.reqsAgain[0] === user.uid ? <Loader /> : null}
       {onlineGame.status.isEnded &&
       onlineGame.reqsAgain[0].length !== 0 &&
       onlineGame.reqsAgain[0] !== user.uid &&
