@@ -1,9 +1,7 @@
-import { getAdditionalUserInfo, signInWithPopup } from 'firebase/auth'
 import React from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import Ripples from 'react-ripples'
 import { Slide, toast } from 'react-toastify'
-import { auth, googleProvider, initNewUser } from '../../firebase.config'
 
 function GoogleSignIn({ clicked, setClicked }) {
   // const { displayError } = useUser()
@@ -15,20 +13,19 @@ function GoogleSignIn({ clicked, setClicked }) {
       toastId: 'improve',
     })
     return
-    // eslint-disable-next-line no-unreachable
-    setClicked(true)
-    signInWithPopup(auth, googleProvider)
-      .then((user) => {
-        if (getAdditionalUserInfo(user).isNewUser) {
-          initNewUser(user)
-        }
-        setClicked(false)
-      })
-      .catch((er) => {
-        console.log(er.code)
-        setClicked(false)
-        // displayError(er.code)
-      })
+    // setClicked(true)
+    // signInWithPopup(auth, googleProvider)
+    //   .then((user) => {
+    //     if (getAdditionalUserInfo(user).isNewUser) {
+    //       initNewUser(user)
+    //     }
+    //     setClicked(false)
+    //   })
+    //   .catch((er) => {
+    //     console.log(er.code)
+    //     setClicked(false)
+    //     // displayError(er.code)
+    //   })
   }
   return (
     <Ripples
