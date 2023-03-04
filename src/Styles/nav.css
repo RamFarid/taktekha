@@ -1,0 +1,30 @@
+nav {
+  position: absolute;
+  width: 364px;
+  height: 64px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 3rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  /* 2475C5 */
+
+  background: var(--primary-color);
+}
+
+nav .nav-link-co {
+  border-radius: 50%;
+}
+
+nav .nav-link {
+  padding: 0.7rem;
+  border-radius: 50%;
+  position: relative;
+}
+
+.nav-link.active > svg {
+  transition: all 0.6s ease;
+  color: var(--light-bg) !important;
+}

@@ -1,0 +1,86 @@
+.FREINDS__PAGE {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.FREINDS__PAGE .input-co {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.78rem;
+  padding: 0px 14px;
+  height: 54px;
+  border-radius: 4px;
+
+  background: var(--light-bg);
+  border: 1px solid var(--light-border);
+}
+
+.FREINDS__PAGE .input-co:focus {
+  outline: 1px solid var(--primary-color);
+}
+
+#dark .FREINDS__PAGE .input-co {
+  border: 1px solid var(--dark-border);
+  background-color: unset;
+}
+
+.FREINDS__PAGE .input-co input {
+  flex: 1;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.FREINDS__PAGE .sec-wrapper .single-data {
+  margin: 0.75rem 0;
+}
+
+.FREINDS__PAGE .sec-wrapper h5 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.PORTALS .data-wrapper.invite-friends__page {
+  height: unset;
+  padding: 2rem;
+}
+.FREINDS__PAGE .sec-wrapper h5 span {
+  font-weight: 900;
+}
+
+/* .FREINDS__PAGE .sec-wrapper .single-data  */
+
+/*  */
+
+#dark .friend-req-btn {
+  border: 0.3px solid var(--dark-border);
+}
+
+.friend-req-btn {
+  position: absolute !important;
+  cursor: pointer;
+  top: 1rem;
+  right: 2rem;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  outline: none;
+  border-radius: 50%;
+  padding: 0.3rem;
+  border: 0.3px solid var(--light-txt);
+}
+
+.FREINDS__PAGE .all {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.FREINDS__PAGE .sec-wrapper .l-c {
+  background-color: transparent;
+}

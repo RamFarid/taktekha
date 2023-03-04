@@ -1,0 +1,161 @@
+.SETTING__PAGE {
+  width: 100%;
+  height: 100%;
+}
+
+.SETTING__PAGE h2 {
+  position: relative;
+  color: var(--light-bg);
+  font-size: 2rem;
+}
+
+.SETTING__PAGE .settings-wrapper {
+  border-radius: 16px;
+  height: -webkit-fill-available;
+  display: flex;
+  flex-direction: column;
+  z-index: 0;
+  position: relative;
+  color: inherit;
+  transition: all ease-in-out 0.3s;
+
+  background: var(--light-bg);
+  box-shadow: 0px 2px 16px rgb(75 75 75 / 15%);
+}
+
+#dark .SETTING__PAGE .settings-wrapper {
+  background-color: var(--dark-focus);
+}
+
+.SETTING__PAGE .settings-wrapper > * {
+  padding: 1.5rem;
+}
+
+.SETTING__PAGE .settings-wrapper .acc-info {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.SETTING__PAGE .settings-wrapper .acc-info img {
+  border-radius: 50%;
+  width: clamp(32px, 40px, 64px);
+  height: clamp(32px, 40px, 64px);
+  aspect-ratio: 1/1;
+}
+
+.SETTING__PAGE .settings-wrapper .acc-info > figcaption {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.SETTING__PAGE .settings-wrapper .acc-info .uid > input {
+  font-size: 12px;
+}
+
+.SETTING__PAGE .settings-wrapper .sub-title {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  margin-bottom: 0.5rem;
+
+  color: var(--dark-txt);
+}
+
+.SETTING__PAGE .settings-wrapper .general-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+
+  border-bottom: 0.5px solid var(--dark-txt);
+  border-top: 0.5px solid var(--dark-txt);
+}
+
+.SETTING__PAGE .settings-wrapper .general-settings {
+  border-bottom: 0.5px solid var(--dark-border-btns);
+  border-top: 0.5px solid var(--dark-border-btns);
+}
+
+.SETTING__PAGE .settings-wrapper .general-settings .triggers-btn-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: inherit;
+}
+
+.SETTING__PAGE .settings-wrapper .trigger-btn {
+  user-select: none;
+  width: 56px;
+  height: 29px;
+  transition: 0.4s all ease;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0.3rem;
+  background: #eaeaea;
+  border-radius: 20px;
+  position: relative;
+}
+
+#dark .SETTING__PAGE .settings-wrapper .trigger-btn {
+  background-color: #2f2f2f;
+}
+
+.SETTING__PAGE .settings-wrapper .trigger-btn.active,
+#dark .SETTING__PAGE .settings-wrapper .trigger-btn.active {
+  background: var(--primary-color);
+}
+
+.SETTING__PAGE .settings-wrapper .trigger-btn.active .pendulum {
+  left: unset;
+  transform: translateX(85%);
+}
+
+.SETTING__PAGE .settings-wrapper .trigger-btn span {
+  transition: 0.4s all ease;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+
+  color: inherit;
+}
+
+.SETTING__PAGE .settings-wrapper .trigger-btn .pendulum {
+  transition: 0.4s all ease;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background-color: var(--light-bg);
+  position: absolute;
+  left: 2px;
+}
+
+.SETTING__PAGE .settings-wrapper .logout {
+  padding: 0.5rem;
+  width: fit-content;
+  border-radius: 1rem;
+  cursor: pointer;
+  user-select: none;
+
+  color: var(--light-bg);
+}
+
+.SETTING__PAGE .settings-wrapper .help a {
+  outline: none;
+  color: inherit;
+}
+
+.SETTING__PAGE .overlay-design {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  background: var(--primary-color);
+  height: 300px;
+  border-radius: 0 0 0.75rem 0.75rem;
+}

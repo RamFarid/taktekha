@@ -1,0 +1,31 @@
+section.Error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 12px;
+  height: 100vh;
+}
+
+section.Error .primary-btn {
+  text-decoration: none;
+  color: var(--light-bg);
+  outline: none;
+  background-color: var(--primary-color);
+  padding: 10px;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  transition: all 300ms ease;
+  border: none;
+  font-size: 12px;
+}
+
+.Error p {
+  font-size: 14px;
+  font-weight: 200;
+}
+
+section.Error img {
+  max-width: 112px;
+}

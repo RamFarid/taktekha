@@ -1,0 +1,341 @@
+/* Data of user (Name/Games/Status) */
+.account-info {
+  margin-top: 0.9rem;
+}
+
+.account-info .hi {
+  font-size: 18px;
+  line-height: 21px;
+  text-align: center;
+  color: var(--primary-color);
+}
+
+.account-info figure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+}
+
+.account-info img {
+  border-radius: 50%;
+  width: clamp(32px, 64px, 88px);
+  height: clamp(32px, 64px, 88px);
+  aspect-ratio: 1/1;
+}
+
+.account-info figcaption {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.account-info figcaption input {
+  font-size: 11px;
+}
+
+.account-info .score-co {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 367px;
+  margin: 1rem auto;
+}
+
+.account-info .score-co .single-score:first-child {
+  color: var(--light-green);
+}
+
+.account-info .score-co .single-score:nth-child(2) {
+  color: var(--light-strict);
+}
+
+.account-info .score-co .single-score:last-child {
+  color: var(--dark-txt);
+}
+
+#dark .account-info .score-co .single-score:nth-child(2) {
+  color: var(--dark-strict);
+}
+
+#dark .account-info .score-co .single-score:first-child {
+  color: var(--dark-green);
+}
+
+.account-info .score-co .single-score {
+  position: relative;
+  flex: 1;
+}
+
+.account-info .score-co .single-score:last-child::after {
+  display: none;
+}
+
+.account-info .score-co .single-score:after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 25px;
+  width: 1px;
+  z-index: 1;
+  background-color: var(--light-border);
+}
+#dark .account-info .score-co .single-score:after {
+  background-color: var(--dark-border);
+}
+
+.account-info .score-co .single-score * {
+  text-align: center;
+}
+.account-info .score-co .single-score .score-no {
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.account-info .score-co .single-score .score-type {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+
+  /* color: var(--dark-txt); */
+}
+
+/* Title of Portal without btn  */
+.page-title {
+  font-weight: 500;
+  font-size: 24px;
+  margin: 0 0 1.9125rem 0;
+}
+/* Wrapper that wrap 'single-data' INFO */
+.sec-wrapper {
+  flex: 1;
+  margin: 1rem 0.75rem;
+  overflow-x: scroll;
+  padding-bottom: 6.1rem;
+  position: relative;
+}
+
+/* MSG styles WHEN THERE IS NO DATA IN CONTAINER */
+.msg-empty {
+  width: 100%;
+  min-height: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.msg-empty .txt-msg {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+
+  color: inherit;
+}
+
+.msg-empty .subtxt-msg {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  max-width: 306px;
+  text-align: center;
+  color: var(--dark-txt);
+}
+
+/* Friends data style (GameHistory/FriendData) */
+.single-data {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.1875rem;
+  border-bottom: var(--light-border) 1px solid;
+  margin-bottom: 0.25rem;
+}
+
+#dark .single-data {
+  border-bottom: var(--dark-border) 1px solid;
+}
+
+.single-data .left {
+  cursor: pointer;
+  transition: all 300ms ease;
+}
+
+.single-data.friends .left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.single-data.friends img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.single-data:last-child {
+  border-bottom: none;
+}
+
+.single-data .name {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.single-data .date {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+
+  color: var(--dark-txt);
+}
+
+.single-data .status {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.single-data .btn-status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 12px;
+  height: 26px;
+  border-radius: 4px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  cursor: pointer;
+  user-select: none;
+  border: none;
+  gap: 0.38125rem;
+
+  background-color: var(--primary-color);
+  color: inherit;
+}
+
+.single-data .left {
+  color: inherit;
+}
+
+.single-data .user-status {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.single-data .user-status-symbol {
+  width: 6px;
+  height: 6px;
+  display: inline-flex;
+  border-radius: 50%;
+}
+
+.single-data .user-status-txt {
+  font-size: 9px;
+}
+
+.single-data .user-status-txt.online {
+  color: var(--light-green);
+}
+#dark .single-data .user-status-txt.online {
+  color: var(--dark-green);
+}
+
+.single-data .user-status-txt.playing {
+  color: var(--light-strict);
+}
+#dark .single-data .user-status-txt.playing {
+  color: var(--light-strict);
+}
+
+.single-data .user-status-txt.offline {
+  color: var(--light-border);
+}
+#dark .single-data .user-status-txt.offline {
+  color: var(--disable-color);
+}
+
+/* NOTIFICATION FLAG */
+.friend-notification {
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: red;
+  border-radius: 50%;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+/* The top part of any portal with close btn */
+.top-info {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0.875rem 0 2.1rem 1rem;
+}
+
+.top-info .page-title {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.invite-friends__page .top-info .page-title {
+  color: var(--light-strict);
+}
+
+.invite-friends__page .top-info > .close-portal-btn {
+  display: none !important;
+}
+
+#dark .invite-friends__page .top-info .page-title {
+  color: var(--dark-strict);
+}
+
+.invite-friends__page .top-info .page-title > svg {
+  fill: var(--light-strict);
+}
+
+#dark .invite-friends__page .top-info .page-title > svg {
+  fill: var(--dark-strict);
+}
+
+/* Secondary button */
+.strict-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 12px;
+  height: 26px;
+  border-radius: 4px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  cursor: pointer;
+  background: none;
+  gap: 0.38125rem;
+  margin-left: 0.3rem;
+  color: var(--light-strict) !important;
+  border: var(--light-strict) solid 1px !important;
+}
+
+#dark .strict-btn {
+  color: var(--dark-strict) !important;
+  border: var(--light-strict) solid 1px !important;
+  background-color: transparent !important;
+}

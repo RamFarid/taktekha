@@ -4,37 +4,130 @@
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta name="description" content="Web site created using create-react-app" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
+    <meta name="theme-color" content="#7e6dd1" />
+    <meta
+      name="description"
+      content="Play tic tac toe with your friends, see your game history."
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/LOGO192.jpg" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+    <title>Taktekha</title>
+    <style>
+      noscript {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        height: 97vh;
+        justify-content: center;
+        align-items: center;
+        font-size: 3rem;
+        text-align: center;
+        font-weight: 900;
+      }
+      .l-c {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 0;
+        height: 100%;
+        z-index: 2;
+        background: rgba(0, 0, 0, 26%);
+      }
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+      .loader {
+        transform: rotateZ(45deg);
+        perspective: 1000px;
+        border-radius: 50%;
+        width: 48px;
+        height: 48px;
+        color: #fff;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -24px -24px;
+      }
+      .loader:before,
+      .loader:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: inherit;
+        height: inherit;
+        border-radius: 50%;
+        transform: rotateX(70deg);
+        animation: 1s spin linear infinite;
+      }
+      .loader:after {
+        color: #7e6dd1;
+        transform: rotateY(70deg);
+        animation-delay: 0.4s;
+      }
+
+      @keyframes rotate {
+        0% {
+          transform: translate(-50%, -50%) rotateZ(0deg);
+        }
+        100% {
+          transform: translate(-50%, -50%) rotateZ(360deg);
+        }
+      }
+
+      @keyframes rotateccw {
+        0% {
+          transform: translate(-50%, -50%) rotate(0deg);
+        }
+        100% {
+          transform: translate(-50%, -50%) rotate(-360deg);
+        }
+      }
+
+      @keyframes spin {
+        0%,
+        100% {
+          box-shadow: 0.2em 0px 0 0px currentcolor;
+        }
+        12% {
+          box-shadow: 0.2em 0.2em 0 0 currentcolor;
+        }
+        25% {
+          box-shadow: 0 0.2em 0 0px currentcolor;
+        }
+        37% {
+          box-shadow: -0.2em 0.2em 0 0 currentcolor;
+        }
+        50% {
+          box-shadow: -0.2em 0 0 0 currentcolor;
+        }
+        62% {
+          box-shadow: -0.2em -0.2em 0 0 currentcolor;
+        }
+        75% {
+          box-shadow: 0px -0.2em 0 0 currentcolor;
+        }
+        87% {
+          box-shadow: 0.2em -0.2em 0 0 currentcolor;
+        }
+      }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    <div id="portals"></div>
+    <div id="root">
+      <div class="l-c">
+        <span class="loader"></span>
+      </div>
+    </div>
+    <script>
+      const theme = window.localStorage.getItem('theme')
+      if (theme === 'dark') {
+        document.querySelector('html').style.backgroundColor = '#0c1017'
+      }
+    </script>
   </body>
 </html>

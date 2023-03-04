@@ -1,0 +1,213 @@
+.game-board {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.4rem;
+  padding: 1.4rem;
+  position: relative;
+}
+
+.game-board .game-status {
+  font-weight: 500;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.7rem;
+  color: inherit;
+}
+
+.game-board .game-status .btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: var(--primary-color);
+}
+
+.game-board .game-user {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.game-board .game-user .game-user-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.5185rem;
+  border-radius: 0.625rem;
+  cursor: pointer;
+
+  border: 1px solid var(--light-border);
+  background: #f1f1f1;
+}
+
+#dark .game-board .game-user .game-user-wrapper {
+  border: 1px solid var(--dark-border);
+  background: var(--dark-focus);
+}
+
+.game-board .game-user .game-user-wrapper .time {
+  text-align: center;
+  font-size: 14px;
+}
+
+.game-board .game-user:last-child .game-user-wrapper .time {
+  text-align: end;
+}
+
+.game-board .game-user .user-photo {
+  width: clamp(32px, 42px, 132px);
+  height: clamp(32px, 42px, 132px);
+  overflow: hidden;
+  border-radius: 0.3165rem;
+}
+
+.game-board .game-user .user-photo img {
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 1/1;
+  height: 100%;
+}
+
+.game-board .game-user:last-child {
+  flex-direction: row;
+}
+
+.game-board .board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: 364px;
+  height: 364px;
+  gap: 0.375rem;
+}
+
+.game-board .board .single-turn {
+  border-radius: 0.1875rem;
+  transition: all 0.3s ease;
+  border: 1px solid var(--light-border);
+  box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+#dark .board .single-turn {
+  border: 1px solid var(--dark-border);
+}
+
+.game-board .board .single-turn.o-symbol {
+  background: rgba(255, 130, 126, 0.2);
+  border: 1px solid var(--light-strict);
+}
+
+.game-board .board .single-turn.x-symbol {
+  background: rgba(70, 163, 255, 0.2);
+  border: 1px solid var(--primary-color);
+}
+
+.game-board .board .single-turn .slash,
+.game-board .board .single-turn .back-slash {
+  position: absolute;
+  background: var(--primary-color);
+  left: 50%;
+  height: 70%;
+  width: 0.4375rem;
+  border-radius: 1rem;
+}
+
+.game-board .board .single-turn .slash {
+  transform: rotate(45deg);
+}
+.game-board .board .single-turn .back-slash {
+  transform: rotate(-45deg);
+}
+
+.game-board .user-options {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: -1.2rem;
+  margin-left: 0.9rem;
+}
+
+.game-board .user-options figure {
+  border-radius: 50%;
+  width: 1.4rem;
+  height: 1.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: var(--light-txt);
+  cursor: pointer;
+  /* background-color: ; */
+  position: relative;
+}
+
+.game-board .user-options figure .friend-notification {
+  top: 1px;
+  right: 2px;
+}
+.game-board .user-options figure.chat-ico > svg {
+  fill: var(--primary-color);
+}
+
+.game-board .user-options figure.q-chat-ico > svg {
+  fill: #f4bb44;
+}
+
+.game-board .end-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+  width: 364px;
+  height: 54px;
+  cursor: pointer;
+  /* position: absolute;
+  bottom: 12%;
+  z-index: 2; */
+  border-radius: 4px;
+  color: inherit;
+
+  background-color: var(--light-bg);
+  border: 1px solid var(--light-border);
+}
+
+#dark .game-board .end-btn {
+  background-color: var(--dark-bg);
+  border: 1px solid var(--dark-border-btns);
+}
+
+.game-board .home-btn {
+  cursor: pointer;
+  position: absolute;
+  top: 1.7rem;
+  left: 1.4rem;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  outline: none;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+}

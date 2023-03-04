@@ -1,0 +1,36 @@
+.loader-account {
+  z-index: 2;
+  position: absolute;
+  inset: 0;
+  gap: 0.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  background-color: var(--light-bg);
+}
+
+.loader-account .txt-loader {
+  font-size: 14px;
+  text-align: center;
+}
+
+.loader-account .loader-bar {
+  overflow: hidden;
+  background-color: var(--light-border);
+  width: 364px;
+  height: 6px;
+  border-radius: 5px;
+}
+
+.loader-account .loader-bar .bar {
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  height: 100%;
+  width: 44%;
+}
+
+.loader-account .failture-btn {
+  flex: 2;
+}

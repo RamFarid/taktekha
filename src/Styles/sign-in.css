@@ -1,0 +1,61 @@
+.START__UP {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: space-around;
+  width: 100%;
+  height: 100%;
+}
+
+.START__UP .overview {
+  flex: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.START__UP .overview img {
+  width: 96px;
+  /* height: 83px; */
+}
+
+.START__UP .overview h5 {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.START__UP .overview p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+
+  color: var(--dark-txt);
+}
+
+.SIGN_IN .btn-co {
+  flex: 2;
+}
+
+.SIGN_IN .btn-co .sign-in-btn {
+  cursor: pointer;
+  display: flex !important;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+  width: 90%;
+  border-radius: 4px;
+  margin: 1rem auto;
+  padding: 12px;
+  user-select: none;
+
+  border: 1px solid var(--light-border);
+}
+
+#dark .SIGN_IN .sign-in-btn {
+  border: 1px solid var(--dark-border-btns);
+}
