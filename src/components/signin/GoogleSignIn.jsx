@@ -2,12 +2,20 @@ import { getAdditionalUserInfo, signInWithPopup } from 'firebase/auth'
 import React from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import Ripples from 'react-ripples'
-// import { useUser } from '../../contexts/UserContext'
+import { Slide, toast } from 'react-toastify'
 import { auth, googleProvider, initNewUser } from '../../firebase.config'
 
 function GoogleSignIn({ clicked, setClicked }) {
   // const { displayError } = useUser()
   const handleGoogleAuth = () => {
+    toast('The game is undergoing updates now, contact us for more details', {
+      autoClose: 20000,
+      hideProgressBar: true,
+      transition: Slide,
+      toastId: 'improve',
+    })
+    return
+    // eslint-disable-next-line no-unreachable
     setClicked(true)
     signInWithPopup(auth, googleProvider)
       .then((user) => {

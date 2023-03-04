@@ -2,12 +2,21 @@ import { getAdditionalUserInfo, signInWithPopup } from 'firebase/auth'
 import React from 'react'
 import { BsFacebook } from 'react-icons/bs'
 import Ripples from 'react-ripples'
+import { Slide, toast } from 'react-toastify'
 // import { useUser } from '../../contexts/UserContext'
 import { auth, facebookProvider, initNewUser } from '../../firebase.config'
 
 function FacebookSignIn({ clicked, setClicked }) {
   // const { displayError } = useUser()
   const facebookSigninHandler = () => {
+    toast('The game is undergoing updates now, contact us for more details', {
+      autoClose: 20000,
+      hideProgressBar: true,
+      transition: Slide,
+      toastId: 'improve',
+    })
+    return
+    // eslint-disable-next-line no-unreachable
     setClicked(true)
     signInWithPopup(auth, facebookProvider)
       .then((user) => {
