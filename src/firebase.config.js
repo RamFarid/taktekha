@@ -26,17 +26,23 @@ export const googleProvider = new GoogleAuthProvider()
 export const facebookProvider = new FacebookAuthProvider()
 
 export const initNewUser = async (credintioals) => {
-  await setDoc(doc(db, 'users', credintioals.user.uid), {
-    uid: credintioals.user.uid,
-    displayName: credintioals.user.displayName,
-    friendsList: [],
-    games: [0, 0, 0],
-    photo: credintioals.user.photoURL,
-    time: serverTimestamp(),
-  }).catch((error) => {
+  try {
+    await setDoc(doc(db, 'users', credintioals.user.uid), {
+      uid: credintioals.user.uid,
+      displayName: credintioals.user.displayName,
+      friendsList: [],
+      games: [0, 0, 0],
+      photo: credintioals.user.photoURL,
+      time: serverTimestamp(),
+    })
+  } catch (error) {
     toast.error(
-      'Error occured while init your account, CONTACT US so I can help you'
+      'Error occured while init your account, CONTACT US so I can help you',
+      {
+        autoClose: 15000,
+      }
     )
-    toast.error(error)
-  })
+    toast.error(error.message, { autoClose: 15000 })
+    credintioals.user.delete()
+  }
 }
