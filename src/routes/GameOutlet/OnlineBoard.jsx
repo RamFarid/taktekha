@@ -117,7 +117,7 @@ function OnlineBoard() {
     const newGameState = { ...ONLINE_INITIAL_STATE }
     newGameState.id = id
     newGameState.player1 = [user.uid, 'x']
-    newGameState.player2 = [anotherFriend.uid, 'o']
+    newGameState.player2 = [onlineGame.reqsAgain[0], 'o']
     newGameState.mode = 'LAZY'
     newGameState.turn = user.uid
     newGameState.time = serverTimestamp()
