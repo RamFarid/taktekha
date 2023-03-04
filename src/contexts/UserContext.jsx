@@ -550,7 +550,7 @@ function UserContextProvider({ children }) {
       roomId: id,
     })
       .then(() => {
-        const newGameState = { ...ONLINE_INITIAL_STATE }
+        const newGameState = structuredClone(ONLINE_INITIAL_STATE)
         newGameState.id = id
         newGameState.mode = 'LAZY'
         newGameState.player1 = [data.from, 'x']

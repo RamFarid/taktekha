@@ -102,7 +102,7 @@ function Settings() {
             network='facebook'
           />
           <SocialIcon
-            url='https://api.whatsapp.com/send?phone=201553706448&text=Welcome%20Ram,%20I%27m%20from%20Taktekha%20game...%20\n%20type%20your%20mwssage%20here'
+            url='https://api.whatsapp.com/send?phone=201553706448&text=Welcome%20Ram,%20I%27m%20from%20Taktekha%20game...%20%0A%20type%20your%20mwssage%20here'
             style={ICON_STYLE}
           />
           <SocialIcon

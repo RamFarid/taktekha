@@ -117,7 +117,7 @@ function OnlineBoard() {
 
   const acceptReqAgain = async () => {
     const id = uid(11)
-    const newGameState = { ...ONLINE_INITIAL_STATE }
+    const newGameState = structuredClone(ONLINE_INITIAL_STATE)
     newGameState.id = id
     newGameState.player1 = [user.uid, 'x']
     newGameState.player2 = [onlineGame.reqsAgain[0], 'o']
@@ -128,7 +128,7 @@ function OnlineBoard() {
       .then(() => {
         setOnlineGame(newGameState)
         navigateTo(`/board/${id}`)
-        const currentGame = { ...onlineGame }
+        const currentGame = structuredClone(onlineGame)
         currentGame.reqsAgain[1] = user.uid
         currentGame.reqsAgain[2] = id
         setDoc(doc(db, 'games', onlineGame.id), currentGame)

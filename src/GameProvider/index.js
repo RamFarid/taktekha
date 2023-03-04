@@ -243,7 +243,7 @@ function useOnlineGame() {
 
   const onlineMove = (index) => {
     const newArray = makeMove(index, turnType(), state.board)
-    const newGameState = { ...state }
+    const newGameState = structuredClone(state)
     newGameState.board = newArray
     const gameWithNewLogic = changingOnlineLogic(newGameState)
 
@@ -312,11 +312,11 @@ function useOnlineGame() {
 
   const requestGame = () => {
     if (state.reqsAgain[0].length === 0) {
-      const newGameState = { ...state }
+      const newGameState = structuredClone(state)
       newGameState.reqsAgain[0] = user.uid
       setDoc(doc(db, 'games', newGameState.id), newGameState)
     } else if (state.reqsAgain[1].length === 0) {
-      const newGameState = { ...state }
+      const newGameState = structuredClone(state)
       newGameState.reqsAgain[1] = user.uid
       setDoc(doc(db, 'games', newGameState.id), newGameState)
     }
