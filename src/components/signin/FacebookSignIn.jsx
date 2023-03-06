@@ -2,7 +2,7 @@ import React from 'react'
 import { BsFacebook } from 'react-icons/bs'
 import Ripples from 'react-ripples'
 import { getAdditionalUserInfo, signInWithPopup } from 'firebase/auth'
-import { auth, facebookProvider } from '../../firebase.config'
+import { auth, facebookProvider, initNewUser } from '../../firebase.config'
 // import { useUser } from '../../contexts/UserContext'
 
 function FacebookSignIn({ clicked, setClicked }) {
@@ -18,7 +18,7 @@ function FacebookSignIn({ clicked, setClicked }) {
     signInWithPopup(auth, facebookProvider)
       .then((user) => {
         if (getAdditionalUserInfo(user).isNewUser) {
-          // initNewUser(user)
+          initNewUser(user)
         }
         setClicked(false)
       })
