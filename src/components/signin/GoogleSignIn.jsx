@@ -2,7 +2,7 @@ import { getAdditionalUserInfo, signInWithPopup } from 'firebase/auth'
 import React from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import Ripples from 'react-ripples'
-import { auth, googleProvider } from '../../firebase.config'
+import { auth, googleProvider, initNewUser } from '../../firebase.config'
 
 function GoogleSignIn({ clicked, setClicked }) {
   // const { displayError } = useUser()
@@ -17,7 +17,7 @@ function GoogleSignIn({ clicked, setClicked }) {
     signInWithPopup(auth, googleProvider)
       .then((user) => {
         if (getAdditionalUserInfo(user).isNewUser) {
-          // initNewUser(user)
+          initNewUser(user)
         }
         setClicked(false)
       })
