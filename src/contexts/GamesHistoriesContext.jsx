@@ -1,7 +1,8 @@
 import { ref, set } from 'firebase/database'
 import {
   collection,
-  doc,
+  deleteDoc,
+  doc as docRef,
   getDocs,
   query,
   updateDoc,
@@ -35,7 +36,10 @@ function GamesHistoriesContextProvider({ children }) {
           )
         )
         return { data1, data2 }
-      } catch (error) {}
+      } catch (error) {
+        console.log(error)
+        toast.error(`Failed get your games history: ${error}`)
+      }
     }
     if (user.uid && Object.keys(userData).length !== 0) {
       // Get Games History
@@ -46,7 +50,9 @@ function GamesHistoriesContextProvider({ children }) {
           let gamesInProgress = []
           if (data1.size > 0) {
             data1.forEach((doc) => {
-              if (doc.data().status.isEnded === false) {
+              if (doc.data().player1[0] === doc.data().player2[0]) {
+                deleteDoc(docRef(db, 'games', doc.data().id))
+              } else if (doc.data().status.isEnded === false) {
                 gamesInProgress.push(doc.data())
               } else if (doc.data().status.isEnded === true) {
                 gamesHistory.push(doc.data())
@@ -55,7 +61,9 @@ function GamesHistoriesContextProvider({ children }) {
           }
           if (data2.size > 0) {
             data2.forEach((doc) => {
-              if (doc.data().status.isEnded === false) {
+              if (doc.data().player1[0] === doc.data().player2[0]) {
+                deleteDoc(docRef(db, 'games', doc.data().id))
+              } else if (doc.data().status.isEnded === false) {
                 gamesInProgress.push(doc.data())
               } else if (doc.data().status.isEnded === true) {
                 gamesHistory.push(doc.data())
@@ -89,7 +97,7 @@ function GamesHistoriesContextProvider({ children }) {
             }
           })
           if (JSON.stringify(serverGames) !== JSON.stringify(userData.games)) {
-            updateDoc(doc(db, 'users', user.uid), {
+            updateDoc(docRef(db, 'users', user.uid), {
               games: serverGames,
             }).then(() => {
               console.log('Update game score succssefully')
