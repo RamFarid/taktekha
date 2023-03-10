@@ -69,7 +69,17 @@ function GameManager() {
     if (Object.keys(game).length === 0 || gamesBetween === 'unknown') {
       return <Loader />
     } else if (Object.keys(game).length > 0 && gamesBetween !== 'unknown') {
-      if (game?.player2[0] === user.uid || game?.player1[0] === user.uid) {
+      if (game?.player1[0] === game?.player2[0]) {
+        deleteDoc(doc(db, 'games', game?.id)).then(() => {
+          toast.error(
+            'The game has been deleted, It seems that you are joining the game that the same player is playing with himself'
+          )
+        })
+        return <Navigate to='/' />
+      } else if (
+        game?.player2[0] === user.uid ||
+        game?.player1[0] === user.uid
+      ) {
         return <Outlet />
       } else if (game?.player2[0].length === 0 && gamesBetween === 'true') {
         deleteDoc(doc(db, 'games', game.id)).then(() => {
@@ -80,7 +90,7 @@ function GameManager() {
         })
         return <Navigate to={'/'} />
       } else if (game?.player2[0].length === 0 && gamesBetween === 'false') {
-        updateDoc(doc(db, 'games', id), {
+        updateDoc(doc(db, 'games', game.id), {
           player2: [user.uid, 'o'],
         }).catch((error) => {
           toast.error("We can't comine you in the Game")
