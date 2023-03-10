@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import HomeDataContainer from './HomeDataContainer'
 import { useUser } from '../../../contexts/UserContext'
-import GamesHistory from '../../Models/GamesHistory'
-import EmptyMsg from '../../reusable/EmptyMsg'
-import SingleDataHistory from '../../reusable/SingleDataGame'
+const GamesHistory = React.lazy(() => import('../../Models/GamesHistory'))
+const EmptyMsg = React.lazy(() => import('../../reusable/EmptyMsg'))
+const SingleDataHistory = React.lazy(() =>
+  import('../../reusable/SingleDataGame')
+)
 function AccountData() {
   const { gamesHistory, gamesInProgress } = useUser()
   const [openGamesHistory, setOpenGamesHistory] = useState(false)

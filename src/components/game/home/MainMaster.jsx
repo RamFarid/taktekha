@@ -12,10 +12,18 @@ function MainMaster({ changePageI }) {
       exit={{ scale: 0 }}
     >
       <TitlePage title={'Game Master'} />
-      <button className='master-btn create' onClick={() => changePageI(2)}>
+      <button
+        aria-label='Create game'
+        className='master-btn create'
+        onClick={() => changePageI(2)}
+      >
         Create room
       </button>
-      <button className='master-btn join' onClick={() => changePageI(1)}>
+      <button
+        aria-label='Join room'
+        className='master-btn join'
+        onClick={() => changePageI(1)}
+      >
         Join room
       </button>
       <div className='or'>
@@ -23,6 +31,7 @@ function MainMaster({ changePageI }) {
         <span className='txt'>OR</span>
       </div>
       <button
+        aria-label='Play locally'
         className='master-btn strict-flag'
         onClick={() => navigateTo('/board')}
       >

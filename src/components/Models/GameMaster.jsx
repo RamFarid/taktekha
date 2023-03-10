@@ -1,10 +1,11 @@
 import React from 'react'
-import MainMaster from '../game/home/MainMaster'
-import JoinMaster from '../game/home/JoinMaster'
-import CreateGameMaster from '../game/home/CreateGameMaster'
-import FloatingModel from './FloatingModel'
-
-function GameMaster({ isPortal, setIsPortal, pageI, setPageI }) {
+const MainMaster = React.lazy(() => import('../game/home/MainMaster'))
+const JoinMaster = React.lazy(() => import('../game/home/JoinMaster'))
+const CreateGameMaster = React.lazy(() =>
+  import('../game/home/CreateGameMaster')
+)
+const FloatingModel = React.lazy(() => import('./FloatingModel'))
+function GameMaster({ setIsPortal, pageI, setPageI }) {
   return (
     <FloatingModel
       closePortal={(e) => {

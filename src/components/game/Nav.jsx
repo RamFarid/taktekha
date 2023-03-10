@@ -14,7 +14,7 @@ function Nav() {
   return (
     <nav>
       <Ripples>
-        <NavLink to='/' className='nav-link' end>
+        <NavLink aria-label='Home Page' to='/' className='nav-link' end>
           <AiFillHome size={20} color='#615a87' />
         </NavLink>
       </Ripples>
@@ -25,12 +25,21 @@ function Nav() {
       </Ripples> */}
       <Ripples className='nav-link-co'>
         {friendRequests.length >= 1 && <FriendsNotification />}
-        <NavLink className='nav-link' to='/friends' end>
+        <NavLink
+          aria-label='Friends Page'
+          className='nav-link'
+          to='/friends'
+          end
+        >
           <HiUsers size={20} color='#615a87' />
         </NavLink>
       </Ripples>
       <Ripples className='nav-link-co'>
-        <NavLink to={'/settings'} className='nav-link'>
+        <NavLink
+          aria-label='Settings page'
+          to={'/settings'}
+          className='nav-link'
+        >
           <FiSettings size={20} color='#615a87' />
         </NavLink>
       </Ripples>

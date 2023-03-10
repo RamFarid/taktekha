@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react'
 import TitlePage from '../../components/reusable/TitlePage'
 import SearchFriendInput from '../../components/game/friends/SearchFriendInput'
 import SearchPage from '../../components/game/friends/SearchPage'
-import FriendUserData from '../../components/game/friends/FriendUserData'
-
 import '../../Styles/friends.css'
 import FriendsReqBtn from '../../components/game/friends/FriendsReqBtn'
 import usePageTitle from '../../hooks/usePageTitle'
+
+const FriendUserData = React.lazy(() =>
+  import('../../components/game/friends/FriendUserData')
+)
 function FriendsPage() {
   const [searchTxt, setSearchTxt] = useState('')
   const [pageTitle, setPageTitle] = useState('')

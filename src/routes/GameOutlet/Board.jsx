@@ -1,15 +1,13 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { FiRotateCw } from 'react-icons/fi'
 import SingleTurn from '../../components/game/board/SingleTurn'
-import Chat from '../../components/Models/Chat'
 import { useGameData } from '../../contexts/GameContext'
 
 import '../../Styles/board.css'
 import HomeBtn from '../../components/game/board/HomeBtn'
 function Board() {
   const { gameState, dispatch } = useGameData()
-  const [chatAppear, setChatAppear] = useState(false)
   useEffect(() => {
     dispatch({ type: 'first_init', payload: { turn: 'x', mode: 'LOCAL' } })
   }, [dispatch])
@@ -56,6 +54,7 @@ function Board() {
       <AnimatePresence key={'endButton'}>
         {gameState.status.isEnded && (
           <motion.button
+            aria-label='reset board'
             initial={{ scale: 0.6, opacity: 0.5 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.6, opacity: 0.5 }}
@@ -67,9 +66,6 @@ function Board() {
             <FiRotateCw size={20} /> One more
           </motion.button>
         )}
-      </AnimatePresence>
-      <AnimatePresence key={'chatModal'}>
-        {chatAppear ? <Chat setChatAppear={setChatAppear} /> : null}
       </AnimatePresence>
     </section>
   )

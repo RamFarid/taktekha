@@ -94,6 +94,7 @@ function SingleDataReqFriend({ uid }) {
             </Ripples>
             <Ripples>
               <button
+                aria-label='Ignore friend request'
                 className='strict-btn'
                 onClick={() => deniedFriend(currentFriend?.uid)}
               >

@@ -80,6 +80,7 @@ function Chat({ setChatAppear, setSeen }) {
             ref={inputRef}
           />
           <button
+            aria-label='Send mwssage'
             className={
               msgTxt.trim().length !== 0
                 ? 'send-btn available'

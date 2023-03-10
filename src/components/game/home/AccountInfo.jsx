@@ -26,12 +26,9 @@ function AccountInfo({ userDataFromUsersCollection }) {
               : user.displayName}
           </span>
           <span className='uid'>
-            <input
-              type={'text'}
-              readOnly
-              value={userDataFromUsersCollection?.uid || ''}
-              className='sub-txt'
-            />
+            <span type={'text'} className='sub-txt'>
+              {userDataFromUsersCollection?.uid || ''}
+            </span>
           </span>
         </figcaption>
       </figure>

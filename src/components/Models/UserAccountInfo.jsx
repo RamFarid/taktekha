@@ -24,6 +24,7 @@ function UserAccountInfo({ setVisibility, friendDataFromUsersCollection }) {
       {friendDataFromUsersCollection?.uid === user.uid ||
       !friendDataFromUsersCollection?.uid ? null : (
         <button
+          aria-label='Control friend'
           className={
             isFromFriend(friendDataFromUsersCollection?.uid)
               ? 'user-btn strict-flag'

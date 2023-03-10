@@ -1,15 +1,12 @@
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { FiRotateCw } from 'react-icons/fi'
 import UserBoard from '../../components/game/board/UserBoard'
 import UserOptions from '../../components/game/board/UserOptions'
-import Chat from '../../components/Models/Chat'
-import Share from '../../components/Models/Share'
 import { useGameData } from '../../contexts/GameContext'
 import HomeBtn from '../../components/game/board/HomeBtn'
 import { db, realtimedb } from '../../firebase.config'
-import Ripples from 'react-ripples'
+
 // import msgNotification from '../../assets/click.wav'
 import '../../Styles/board.css'
 import {
@@ -21,14 +18,20 @@ import {
 } from 'firebase/firestore'
 import { toast } from 'react-toastify'
 import { useUser } from '../../contexts/UserContext'
-import SingleOnlineTurn from '../../components/game/board/SingleOnlineTurn'
 import { ref, set } from 'firebase/database'
-import FloatingModel from '../../components/Models/FloatingModel'
-import { BsFlag } from 'react-icons/bs'
-import { GiOverkill } from 'react-icons/gi'
 import { uid } from 'uid/secure'
 import { ONLINE_INITIAL_STATE } from '../../GameProvider'
 import Loader from '../../components/reusable/Loader'
+import GameStatus from '../../components/game/board/GameStatus'
+import MainOnlineBoard from '../../components/game/board/MainOnlineBoard'
+
+const EndBtn = React.lazy(() => import('../../components/game/board/EndBtn'))
+const FloatingModel = React.lazy(() =>
+  import('../../components/Models/FloatingModel')
+)
+const PlayAgain = React.lazy(() => import('../../components/Models/PlayAgain'))
+const Share = React.lazy(() => import('../../components/Models/Share'))
+const Chat = React.lazy(() => import('../../components/Models/Chat'))
 
 // const notification = new Audio(msgNotification)
 
@@ -36,8 +39,7 @@ function OnlineBoard() {
   const { id } = useParams()
   const navigateTo = useNavigate()
   const { user, userData, friendsList } = useUser()
-  const { onlineGame, requestGame, setOnlineGame, turnStyleGenerator } =
-    useGameData()
+  const { onlineGame, requestGame, setOnlineGame } = useGameData()
   const [chatAppear, setChatAppear] = useState(false)
   const [seen, setSeen] = useState(true)
   const [anotherFriend, setAnotherFriend] = useState({})
@@ -109,11 +111,11 @@ function OnlineBoard() {
     }
     oneMoreAction()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [navigateTo, onlineGame.reqsAgain])
+  }, [onlineGame.reqsAgain])
 
-  const refuseReqAagin = () => {
+  const refuseReqAagin = React.useCallback(() => {
     setIsLivePlay(false)
-  }
+  }, [])
 
   const acceptReqAgain = async () => {
     const id = uid(11)
@@ -147,64 +149,22 @@ function OnlineBoard() {
       onlineGame.reqsAgain[0] !== user.uid &&
       isLivePlay ? (
         <FloatingModel className={'another-game'}>
-          <h3>{anotherFriend?.displayName} want play another game</h3>
-          <div>
-            <Ripples className='strict-btn' onClick={refuseReqAagin}>
-              Give up <BsFlag />
-            </Ripples>
-            <Ripples className='accept green-flag' onClick={acceptReqAgain}>
-              Get him! <GiOverkill size={18} />
-            </Ripples>
-          </div>
+          <PlayAgain
+            acceptReqAgain={acceptReqAgain}
+            anotherFriend={anotherFriend}
+            refuseReqAagin={refuseReqAagin}
+          />
         </FloatingModel>
       ) : null}
       <HomeBtn />
       <UserBoard user={anotherFriend} />
-      <div className='game-status' style={turnStyleGenerator()}>
-        {/* <div className='btn'>
-          <AiOutlineArrowLeft />
-        </div> */}
-        {onlineGame.turn === user.uid && !onlineGame.status.isEnded
-          ? 'Your turn'
-          : onlineGame.status.isEnded &&
-            onlineGame.status.endWith === user.uid &&
-            onlineGame.status.endWith !== 'drew'
-          ? 'You win 😄'
-          : onlineGame.status.isEnded &&
-            onlineGame.status.endWith !== user.uid &&
-            onlineGame.status.endWith !== 'drew'
-          ? `${anotherFriend.displayName} win 😔`
-          : onlineGame.turn !== user.uid && !onlineGame.status.isEnded
-          ? `${anotherFriend.displayName}'s turn`
-          : "IT'S TIE"}
-        {/* <div className='btn'>
-          <AiOutlineArrowRight />
-        </div> */}
-      </div>
-      <div
-        className={
-          onlineGame.turn !== user.uid || onlineGame.status.isEnded
-            ? 'board avoid-pointer-events'
-            : 'board'
-        }
-      >
-        {onlineGame.board.map((move, key) => (
-          <SingleOnlineTurn move={move} key={key} index={key} />
-        ))}
-      </div>
+      <GameStatus anotherFriend={anotherFriend} />
+      <MainOnlineBoard />
       <AnimatePresence key={'endButton'}>
         {onlineGame.status.isEnded &&
         isLivePlay &&
         onlineGame.reqsAgain[0] !== user.uid ? (
-          <motion.button
-            initial={{ scale: 0.6, opacity: 0.5 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.6, opacity: 0.5 }}
-            className='end-btn'
-            onClick={requestGame}
-          >
-            <FiRotateCw size={20} /> One more
-          </motion.button>
+          <EndBtn onClick={requestGame} />
         ) : null}
       </AnimatePresence>
       <UserOptions

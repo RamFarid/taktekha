@@ -1,30 +1,32 @@
 import React, { useEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
-import Game from './routes/Game'
-import SignIn from './routes/SignIn'
 import './Styles/globalstyles.css'
 import './index.css'
-import FriendsPage from './routes/GameOutlet/FriendsPage'
-import HomePage from './routes/GameOutlet/HomePage'
-import Board from './routes/GameOutlet/Board'
-import Settings from './routes/GameOutlet/Settings'
 import GameSoundContextProvider from './contexts/GameSoundContext'
 import AuthRoute from './routes/manager/AuthRoute'
 import NoAuthRoute from './routes/manager/NoAuthRoute'
 import GameContextProvider from './contexts/GameContext'
 import { toast, ToastContainer, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import OnlineBoard from './routes/GameOutlet/OnlineBoard'
 import { useTheme } from './contexts/ThemeContext'
-import GameManager from './routes/manager/GameManager'
 import {
   MdSignalWifiStatusbarConnectedNoInternet,
   MdSignalWifi4Bar,
 } from 'react-icons/md'
-import NotFound from './routes/Errors/NotFound'
 import { off, onValue, ref, set } from 'firebase/database'
 import { realtimedb } from './firebase.config'
 import { useUser } from './contexts/UserContext'
+import Loader from './components/reusable/Loader'
+
+const SignIn = React.lazy(() => import('./routes/SignIn'))
+const NotFound = React.lazy(() => import('./routes/Errors/NotFound'))
+const OnlineBoard = React.lazy(() => import('./routes/GameOutlet/OnlineBoard'))
+const FriendsPage = React.lazy(() => import('./routes/GameOutlet/FriendsPage'))
+const HomePage = React.lazy(() => import('./routes/GameOutlet/HomePage'))
+const Board = React.lazy(() => import('./routes/GameOutlet/Board'))
+const Settings = React.lazy(() => import('./routes/GameOutlet/Settings'))
+const Game = React.lazy(() => import('./routes/Game'))
+const GameManager = React.lazy(() => import('./routes/manager/GameManager'))
 // import click00 from './assets/click00.wav'
 // import click from './assets/click.wav'
 
@@ -33,6 +35,7 @@ function App() {
   const { user } = useUser()
   const location = useLocation()
   useEffect(() => {
+    console.log('Performane apply #1')
     // On online
     const connectedRef = ref(realtimedb, '.info/connected')
     const userStatusHandler = (snap) => {
@@ -87,23 +90,25 @@ function App() {
     <main>
       <GameSoundContextProvider>
         <GameContextProvider>
-          <Routes>
-            <Route element={<AuthRoute />}>
-              <Route path='/' element={<Game />}>
-                <Route index element={<HomePage />} />
-                <Route path='friends' element={<FriendsPage />} />
-                <Route path='settings' element={<Settings />} />
+          <React.Suspense fallback={<Loader />}>
+            <Routes>
+              <Route element={<AuthRoute />}>
+                <Route path='/' element={<Game />}>
+                  <Route index element={<HomePage />} />
+                  <Route path='friends' element={<FriendsPage />} />
+                  <Route path='settings' element={<Settings />} />
+                </Route>
+                <Route element={<GameManager />}>
+                  <Route path='/board/:id' element={<OnlineBoard />} />
+                </Route>
+                <Route path='/board' element={<Board />} />
               </Route>
-              <Route element={<GameManager />}>
-                <Route path='/board/:id' element={<OnlineBoard />} />
+              <Route element={<NoAuthRoute />}>
+                <Route path='/login' element={<SignIn />} />
               </Route>
-              <Route path='/board' element={<Board />} />
-            </Route>
-            <Route element={<NoAuthRoute />}>
-              <Route path='/login' element={<SignIn />} />
-            </Route>
-            <Route path='/*' element={<NotFound />} />
-          </Routes>
+              <Route path='/*' element={<NotFound />} />
+            </Routes>
+          </React.Suspense>
         </GameContextProvider>
       </GameSoundContextProvider>
       <ToastContainer

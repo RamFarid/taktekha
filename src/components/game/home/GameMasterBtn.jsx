@@ -1,7 +1,7 @@
 import { AnimatePresence } from 'framer-motion'
 import React, { useState } from 'react'
 import { GrFormAdd } from 'react-icons/gr'
-import GameMaster from '../../Models/GameMaster'
+const GameMaster = React.lazy(() => import('../../Models/GameMaster'))
 
 function GameMasterBtn() {
   const [isGameMaster, setIsGameMaster] = useState(false)
@@ -12,7 +12,11 @@ function GameMasterBtn() {
   }
   return (
     <React.Fragment>
-      <button className='game-master-btn' onClick={openGameMasterHandler}>
+      <button
+        aria-label='Join and Create games'
+        className='game-master-btn'
+        onClick={openGameMasterHandler}
+      >
         <GrFormAdd size={25} />
       </button>
       <AnimatePresence key={'gameMaster'}>

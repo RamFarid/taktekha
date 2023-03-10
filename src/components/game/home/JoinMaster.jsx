@@ -29,6 +29,7 @@ function JoinMaster({ changePageI }) {
           onChange={(e) => setRoom(e.target.value)}
         />
         <button
+          aria-label="Join friend's room"
           className={
             room.trim().length === 0
               ? 'master-btn disabled-flag avoid-pointer-events'

@@ -96,7 +96,7 @@ function Share() {
           >
             <FaTelegramPlane />
           </a>
-          <button className='link' onClick={shareLink}>
+          <button aria-label='Share' className='link' onClick={shareLink}>
             <AiOutlineShareAlt fill='var(--light-txt)' />
           </button>
         </div>

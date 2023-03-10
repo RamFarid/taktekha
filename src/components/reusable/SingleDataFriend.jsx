@@ -4,12 +4,15 @@ import { AnimatePresence, motion } from 'framer-motion'
 import UserAccountInfo from '../Models/UserAccountInfo'
 import { useUser } from '../../contexts/UserContext'
 import getDate from '../../getDate'
-import FloatingModel from '../Models/FloatingModel'
-import CreateGameMaster from '../game/home/CreateGameMaster'
 import { GiCrossedSabres } from 'react-icons/gi'
 import { BsFlag } from 'react-icons/bs'
 import { off, onValue, ref } from 'firebase/database'
 import { realtimedb } from '../../firebase.config'
+
+const FloatingModel = React.lazy(() => import('../Models/FloatingModel'))
+const CreateGameMaster = React.lazy(() =>
+  import('../game/home/CreateGameMaster')
+)
 
 function SingleDataFriend({ friendDataFromUsersCollection }) {
   const {
@@ -206,6 +209,7 @@ function SingleDataFriend({ friendDataFromUsersCollection }) {
           isSentFriendReq(friendDataFromUsersCollection?.uid)?.result ? (
             <Ripples>
               <button
+                aria-label='Deny challenge'
                 className='strict-btn'
                 onClick={() => deniedHandler(friendDataFromUsersCollection)}
               >
