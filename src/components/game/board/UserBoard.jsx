@@ -2,7 +2,7 @@ import { AnimatePresence } from 'framer-motion'
 import React, { useState } from 'react'
 import Ripples from 'react-ripples'
 import { useGameData } from '../../../contexts/GameContext'
-const UserAccountInfo = React.lazy(import('../../Models/UserAccountInfo'))
+const UserAccountInfo = React.lazy(() => import('../../Models/UserAccountInfo'))
 function UserBoard({ user }) {
   const { onlineGame } = useGameData()
   const [userAccount, setUserAccount] = useState(false)
