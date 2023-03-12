@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app'
 import { doc, getFirestore, serverTimestamp, setDoc } from 'firebase/firestore'
 import { getDatabase } from 'firebase/database'
+import { getAnalytics } from 'firebase/analytics'
 import {
   getAuth,
   GoogleAuthProvider,
@@ -24,6 +25,7 @@ export const db = getFirestore(app)
 export const realtimedb = getDatabase(app)
 export const googleProvider = new GoogleAuthProvider()
 export const facebookProvider = new FacebookAuthProvider()
+export const analytics = getAnalytics(app)
 
 export const initNewUser = async (credintioals) => {
   try {
