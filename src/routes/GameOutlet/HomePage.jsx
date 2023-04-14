@@ -18,7 +18,7 @@ import {
 } from 'firebase/firestore'
 import { db } from '../../firebase.config'
 import { toast } from 'react-toastify'
-function HomePage({ openGamesHistory, setOpenGamesHistory }) {
+function HomePage() {
   const { userData, user, setUserData, setGamesInProgress, setGamesHistory } =
     useUser()
 
@@ -119,10 +119,7 @@ function HomePage({ openGamesHistory, setOpenGamesHistory }) {
             Object.keys(userData).length >= 1 && userData
           }
         />
-        <AccountData
-          openGamesHistory={openGamesHistory}
-          setOpenGamesHistory={setOpenGamesHistory}
-        />
+        <AccountData />
         <GameMasterBtn />
       </section>
     </PullToRefresh>

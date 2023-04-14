@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import './Styles/globalstyles.css'
 import './index.css'
@@ -17,6 +17,7 @@ import { off, onValue, ref, set } from 'firebase/database'
 import { realtimedb } from './firebase.config'
 import { useUser } from './contexts/UserContext'
 import Loader from './components/reusable/Loader'
+import ErrorBoundary from './components/reusable/ErrorBoundary'
 
 const SignIn = React.lazy(() => import('./routes/SignIn'))
 const NotFound = React.lazy(() => import('./routes/Errors/NotFound'))
@@ -33,14 +34,7 @@ const GameManager = React.lazy(() => import('./routes/manager/GameManager'))
 function App() {
   const { theme } = useTheme()
   const { user } = useUser()
-  const [openGamesHistory, setOpenGamesHistory] = useState(false)
   const location = useLocation()
-
-  useEffect(() => {
-    if (openGamesHistory) {
-      window.history.pushState({ openGamesHistory: true }, null, '/')
-    }
-  }, [openGamesHistory])
 
   useEffect(() => {
     console.log('Performane apply #1')
@@ -83,24 +77,17 @@ function App() {
         icon: <MdSignalWifiStatusbarConnectedNoInternet fill='#ff3333' />,
       })
     }
-    const handleBackButton = (event) => {
-      if (event.state.openGamesHistory) {
-        setOpenGamesHistory(false)
-      }
-    }
     // If user being offline
     window.addEventListener('offline', offLineHandler)
     // If user back online after offline
     window.addEventListener('online', onlineHandler)
-    window.addEventListener('popstate', handleBackButton)
     return () => {
       window.addEventListener('offline', offLineHandler)
       window.addEventListener('online', onlineHandler)
-      window.removeEventListener('popstate', handleBackButton)
       off(connectedRef, 'value', userStatusHandler)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [user?.uid])
   return (
     <main>
       <GameSoundContextProvider>
@@ -109,20 +96,25 @@ function App() {
             <Routes>
               <Route element={<AuthRoute />}>
                 <Route path='/' element={<Game />}>
-                  <Route
-                    index
-                    element={
-                      <HomePage
-                        openGamesHistory={openGamesHistory}
-                        setOpenGamesHistory={setOpenGamesHistory}
-                      />
-                    }
-                  />
+                  <Route index element={<HomePage />} />
                   <Route path='friends' element={<FriendsPage />} />
                   <Route path='settings' element={<Settings />} />
                 </Route>
                 <Route element={<GameManager />}>
-                  <Route path='/board/:id' element={<OnlineBoard />} />
+                  <Route
+                    path='/board/:id'
+                    element={
+                      <ErrorBoundary
+                        fallback={
+                          <h1>
+                            Error Happend contact us to solve this problem
+                          </h1>
+                        }
+                      >
+                        <OnlineBoard />
+                      </ErrorBoundary>
+                    }
+                  />
                 </Route>
                 <Route path='/board' element={<Board />} />
               </Route>

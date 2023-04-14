@@ -1,17 +1,21 @@
 import React from 'react'
 import HomeDataContainer from './HomeDataContainer'
 import { useUser } from '../../../contexts/UserContext'
+import { useSearchParams } from 'react-router-dom'
 const GamesHistory = React.lazy(() => import('../../Models/GamesHistory'))
 const EmptyMsg = React.lazy(() => import('../../reusable/EmptyMsg'))
 const SingleDataHistory = React.lazy(() =>
   import('../../reusable/SingleDataGame')
 )
-function AccountData({ openGamesHistory, setOpenGamesHistory }) {
+function AccountData() {
+  const [, setSearchParams] = useSearchParams()
   const { gamesHistory, gamesInProgress } = useUser()
 
   const gameHistory = (e) => {
     if (gamesHistory.length === 0) return
-    setOpenGamesHistory(true)
+    setSearchParams({
+      games_history: 1,
+    })
   }
 
   return (
@@ -48,7 +52,7 @@ function AccountData({ openGamesHistory, setOpenGamesHistory }) {
           )}
         </HomeDataContainer>
       </section>
-      <GamesHistory setPortal={setOpenGamesHistory} isOpen={openGamesHistory} />
+      <GamesHistory />
     </React.Fragment>
   )
 }

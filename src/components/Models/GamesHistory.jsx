@@ -8,16 +8,17 @@ import { useUser } from '../../contexts/UserContext'
 import PortalsTopBar from '../reusable/PortalsTopBar'
 
 import '../../Styles/portals.css'
-function GamesHistory({ setPortal, isOpen }) {
+import { useSearchParams } from 'react-router-dom'
+function GamesHistory() {
   const { gamesHistory } = useUser()
-
+  const [searchParams, setSearchParams] = useSearchParams()
   const closePortal = () => {
-    setPortal(false)
+    setSearchParams({})
   }
 
   return ReactDOM.createPortal(
     <AnimatePresence key={'gameHistoryModel'}>
-      {isOpen && (
+      {Number(searchParams.get('games_history')) && (
         <motion.section
           className='games-history'
           initial={{ x: '100%' }}
