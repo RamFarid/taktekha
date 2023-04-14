@@ -1,5 +1,11 @@
 import { initializeApp } from 'firebase/app'
-import { doc, getFirestore, serverTimestamp, setDoc } from 'firebase/firestore'
+import {
+  doc,
+  enableMultiTabIndexedDbPersistence,
+  getFirestore,
+  serverTimestamp,
+  setDoc,
+} from 'firebase/firestore'
 import { getDatabase } from 'firebase/database'
 import { getAnalytics } from 'firebase/analytics'
 import {
@@ -22,6 +28,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 export const auth = getAuth(app)
 export const db = getFirestore(app)
+enableMultiTabIndexedDbPersistence(db)
 export const realtimedb = getDatabase(app)
 export const googleProvider = new GoogleAuthProvider()
 export const facebookProvider = new FacebookAuthProvider()

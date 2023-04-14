@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
 import DateInput from '../game/home/DateInput'
 import DataWrapper from '../reusable/DataWrapper'
@@ -9,11 +9,12 @@ import PortalsTopBar from '../reusable/PortalsTopBar'
 
 import '../../Styles/portals.css'
 function GamesHistory({ setPortal, isOpen }) {
-  const [,] = useState('')
   const { gamesHistory } = useUser()
+
   const closePortal = () => {
     setPortal(false)
   }
+
   return ReactDOM.createPortal(
     <AnimatePresence key={'gameHistoryModel'}>
       {isOpen && (

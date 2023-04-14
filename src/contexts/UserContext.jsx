@@ -132,7 +132,7 @@ function UserContextProvider({ children }) {
     let deleteListenerForSentGameReqs
     let deleteListenerForRecieveGameReqs
     let dissconnect
-    if (user?.uid) {
+    if (user?.uid && navigator.onLine) {
       const userStatusRef = ref(realtimedb, `users/${user.uid}/status`)
       dissconnect = onDisconnect(userStatusRef)
       dissconnect.set('offline')
@@ -272,6 +272,25 @@ function UserContextProvider({ children }) {
             `Something went wront while get your friend requests ${er}`
           )
       )
+    }
+    if (!navigator.onLine && user?.uid) {
+      getDocs(
+        query(collection(db, 'friendReqs'), where('to', '==', user.uid))
+      ).then((querySnapshot) => {
+        const requests = []
+        if (querySnapshot.size) {
+          querySnapshot.forEach((doc) => {
+            new Audio(notificationSFX).play()
+            requests.push(doc.data())
+          })
+        }
+        setFriendRequests(requests)
+      })
+      getDoc(doc(db, 'users', user.uid)).then((doc) => {
+        if (doc.exists()) {
+          setUserData(doc.data())
+        }
+      })
     }
 
     return () => {

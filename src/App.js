@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import './Styles/globalstyles.css'
 import './index.css'
@@ -33,7 +33,15 @@ const GameManager = React.lazy(() => import('./routes/manager/GameManager'))
 function App() {
   const { theme } = useTheme()
   const { user } = useUser()
+  const [openGamesHistory, setOpenGamesHistory] = useState(false)
   const location = useLocation()
+
+  useEffect(() => {
+    if (openGamesHistory) {
+      window.history.pushState({ openGamesHistory: true }, null, '/')
+    }
+  }, [openGamesHistory])
+
   useEffect(() => {
     console.log('Performane apply #1')
     // On online
@@ -75,13 +83,20 @@ function App() {
         icon: <MdSignalWifiStatusbarConnectedNoInternet fill='#ff3333' />,
       })
     }
+    const handleBackButton = (event) => {
+      if (event.state.openGamesHistory) {
+        setOpenGamesHistory(false)
+      }
+    }
     // If user being offline
     window.addEventListener('offline', offLineHandler)
     // If user back online after offline
     window.addEventListener('online', onlineHandler)
+    window.addEventListener('popstate', handleBackButton)
     return () => {
       window.addEventListener('offline', offLineHandler)
       window.addEventListener('online', onlineHandler)
+      window.removeEventListener('popstate', handleBackButton)
       off(connectedRef, 'value', userStatusHandler)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -94,7 +109,15 @@ function App() {
             <Routes>
               <Route element={<AuthRoute />}>
                 <Route path='/' element={<Game />}>
-                  <Route index element={<HomePage />} />
+                  <Route
+                    index
+                    element={
+                      <HomePage
+                        openGamesHistory={openGamesHistory}
+                        setOpenGamesHistory={setOpenGamesHistory}
+                      />
+                    }
+                  />
                   <Route path='friends' element={<FriendsPage />} />
                   <Route path='settings' element={<Settings />} />
                 </Route>

@@ -27,7 +27,9 @@ function AccountInfo({ userDataFromUsersCollection }) {
           </span>
           <span className='uid'>
             <span type={'text'} className='sub-txt'>
-              {userDataFromUsersCollection?.uid || ''}
+              {userDataFromUsersCollection?.uid
+                ? userDataFromUsersCollection?.uid
+                : user.uid}
             </span>
           </span>
         </figcaption>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import HomeDataContainer from './HomeDataContainer'
 import { useUser } from '../../../contexts/UserContext'
 const GamesHistory = React.lazy(() => import('../../Models/GamesHistory'))
@@ -6,9 +6,9 @@ const EmptyMsg = React.lazy(() => import('../../reusable/EmptyMsg'))
 const SingleDataHistory = React.lazy(() =>
   import('../../reusable/SingleDataGame')
 )
-function AccountData() {
+function AccountData({ openGamesHistory, setOpenGamesHistory }) {
   const { gamesHistory, gamesInProgress } = useUser()
-  const [openGamesHistory, setOpenGamesHistory] = useState(false)
+
   const gameHistory = (e) => {
     if (gamesHistory.length === 0) return
     setOpenGamesHistory(true)
