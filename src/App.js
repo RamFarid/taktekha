@@ -37,7 +37,7 @@ function App() {
   const location = useLocation()
 
   useEffect(() => {
-    console.log('Performane apply #1')
+    console.log('Apply #2')
     // On online
     const connectedRef = ref(realtimedb, '.info/connected')
     const userStatusHandler = (snap) => {
